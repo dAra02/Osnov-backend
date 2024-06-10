@@ -40,7 +40,7 @@ async function saveNotes(notes) {
 async function removeNotes(id) {
   const notes = await getNotes();
 
-  const filterNotes = notes.filter((note) => note.id !== String(id));
+  const filterNotes = notes.filter((note) => note.id !== id);
 
   await saveNotes(filterNotes);
   console.log(chalk.bgRed("Delete note id"));
