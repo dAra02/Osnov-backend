@@ -37,6 +37,18 @@ async function saveNotes(notes) {
   await fs.writeFile(notesPath, JSON.stringify(notes));
 }
 
+async function updateNotes(id, title) {
+  const notes = await getNotes();
+
+  const noteIndex = notes.findIndex((note) => note.id === id);
+
+  if (noteIndex !== -1) {
+    notes[noteIndex].title = title;
+    await saveNotes(notes);
+    console.log(chalk.bgBlue("Note was update"));
+  }
+}
+
 async function removeNotes(id) {
   const notes = await getNotes();
 
@@ -50,4 +62,5 @@ module.exports = {
   addNote,
   printNotes,
   removeNotes,
+  updateNotes,
 };
